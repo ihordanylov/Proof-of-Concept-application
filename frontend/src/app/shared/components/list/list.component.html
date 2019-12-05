@@ -1,0 +1,12 @@
+<table mat-table [dataSource]="dataSource" matSort class="w-100">
+
+  <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{ column }}">
+    <mat-header-cell *matHeaderCellDef >{{ column }}</mat-header-cell>
+    <mat-cell *matCellDef="let item; let i = index"> {{ item[column] }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row" [ngClass]=""
+           (click)="routeChangeClick($event, row)" [class.active]="row.id === selectedId">
+  </mat-row>
+</table>

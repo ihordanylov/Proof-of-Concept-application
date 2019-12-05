@@ -1,0 +1,19 @@
+<mat-card class="w-100">
+  <mat-card-content>
+    <div class="d-flex">
+      <label>Title</label>
+      <mat-card-subtitle class="col-6">{{selectedJob.title}}</mat-card-subtitle>
+    </div>
+    <hr/>
+    <div class="d-flex">
+      <label>Description</label>
+      <mat-card-subtitle class="col-6">{{selectedJob.description}}</mat-card-subtitle>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="d-flex justify-content-center">
+    <button class="btn btn-info" mat-button (click)="makeChanges(selectedJob)">Change</button>
+    <button class="btn btn-danger" mat-button (click)="deleteSelected(selectedJob)">Delete
+      <i class="material-icons">remove_circle_outline</i>
+    </button>
+  </mat-card-actions>
+</mat-card>

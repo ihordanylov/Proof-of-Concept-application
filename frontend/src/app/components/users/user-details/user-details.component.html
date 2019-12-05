@@ -1,0 +1,31 @@
+<mat-card class="example-card w-100">
+  <mat-card-content>
+      <mat-card-title>{{selectedUser.title}}</mat-card-title>
+    <div class="d-flex">
+      <label>Name</label>
+      <mat-card-subtitle class="col-6">{{selectedUser.name}}</mat-card-subtitle>
+    </div>
+    <hr/>
+    <div class="d-flex">
+      <label>Email</label>
+      <mat-card-subtitle class="col-6">{{selectedUser.email}}</mat-card-subtitle>
+    </div>
+    <hr/>
+    <div class="d-flex">
+      <label>Status</label>
+      <mat-card-subtitle class="col-6">{{selectedUser.status}}</mat-card-subtitle>
+    </div>
+    <hr/>
+    <div class="d-flex">
+      <label>Date of Birth</label>
+      <mat-card-subtitle class="col-6">{{selectedUser.dateOfBirth | date:'medium'}}</mat-card-subtitle>
+    </div>
+    <hr/>
+  </mat-card-content>
+  <mat-card-actions class="d-flex justify-content-center">
+    <button class="btn btn-info" mat-button (click)="makeChanges(selectedUser)">Change</button>
+    <button class="btn btn-danger" mat-button (click)="deleteSelected(selectedUser)">Delete
+      <i class="material-icons">remove_circle_outline</i>
+    </button>
+  </mat-card-actions>
+</mat-card>

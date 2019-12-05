@@ -1,0 +1,15 @@
+<button class="m-5" mat-button (click)="routeChangeClick()">
+  Add <i class="material-icons">add_circle</i>
+</button>
+
+<div class="col-12 d-flex justify-content-between">
+  <app-list
+    class="col-6"
+    [dataSource]="jobList"
+    [displayedColumns]="displayedColumns"
+    [routeConst]="routerConst.job"
+  ></app-list>
+
+  <router-outlet></router-outlet>
+</div>
+
