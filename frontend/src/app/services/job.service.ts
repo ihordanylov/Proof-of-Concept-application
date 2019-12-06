@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FeathersService } from '../shared/feathers.service';
 import { Paginated } from '@feathersjs/feathers';
 
+import { CrudService } from './crud.service';
 import { JobModel } from '../shared/modals';
 
 @Injectable({
@@ -13,25 +14,26 @@ export class JobService {
 
   constructor(
     private feathers: FeathersService,
+    private crudService: CrudService
   ) { }
 
-  async createJob(job: JobModel): Promise<JobModel[] | JobModel> {
-    return await this.jobService.create(job);
+  createJob(job: JobModel): Promise<JobModel[] | JobModel> {
+    return this.crudService.create(this.jobService, job);
   }
 
-  async getJobById(retrievedJob: JobModel): Promise<JobModel[] | JobModel> {
-    return await this.jobService.get(retrievedJob.id);
+  getJobById(retrievedJob: JobModel): Promise<JobModel[] | JobModel> {
+    return this.crudService.getById(this.jobService, retrievedJob.id);
   }
 
-  async getJobs(): Promise<JobModel[] | Paginated<JobModel> | JobModel> {
-    return await this.jobService.find();
+  getJobs(): Promise<JobModel[] | Paginated<Promise<JobModel> | JobModel>> {
+    return this.crudService.get(this.jobService);
   }
 
   async updateJobsById(job: JobModel): Promise<JobModel[] | JobModel> {
-    return await this.jobService.update(job.id, job);
+    return await this.crudService.update(this.jobService, job);
   }
 
   async removeJobsById(job: JobModel): Promise<JobModel[] | JobModel> {
-    return await this.jobService.remove(job.id);
+    return await this.crudService.delete(this.jobService, job);
   }
 }

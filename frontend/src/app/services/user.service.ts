@@ -3,6 +3,7 @@ import { FeathersService } from '../shared/feathers.service';
 import { Paginated } from '@feathersjs/feathers';
 
 import { UserModel } from '../shared/modals';
+import {CrudService} from './crud.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,25 +15,26 @@ export class UserService {
 
   constructor(
     private feathers: FeathersService,
+    private crudService: CrudService
   ) { }
 
-  async createUser(user: UserModel): Promise<Paginated<UserModel[]> | UserModel> {
-    return await this.userService.create(user);
+  createUser(user: UserModel): Promise<UserModel[] | UserModel> {
+    return this.crudService.create(this.userService, user);
   }
 
-  async getUserById(user: UserModel): Promise<Paginated<UserModel[]> | UserModel> {
-    return await this.userService.get(user.id);
+  getUserById(user: UserModel): Promise<UserModel[] | UserModel> {
+    return this.crudService.getById(this.userService, user);
   }
 
-  async getUsers(): Promise<UserModel[] | Paginated<UserModel> | UserModel> {
-    return await this.userService.find();
+  getUsers(): Promise<UserModel[] | Paginated<UserModel> | UserModel> {
+    return this.crudService.get(this.userService);
   }
 
-  async updateUserById(user: UserModel): Promise<Paginated<UserModel[]> | UserModel> {
-    return await this.userService.update(user.id, user);
+  updateUserById(user: UserModel): Promise<UserModel[] | UserModel> {
+    return this.crudService.update(this.userService, user);
   }
 
-  async removeUserById(user: UserModel): Promise<Paginated<UserModel[]> | UserModel> {
-    return await this.userService.remove(user.id);
+  removeUserById(user: UserModel): Promise<UserModel[] | UserModel> {
+    return this.crudService.delete(this.userService, user);
   }
 }
